@@ -56,6 +56,7 @@
       <a href="/#provisions">Provisions</a>
       <a href="/#who">Who We Help</a>
       <a href="/safeguarding-compliance/">Safeguarding</a>
+      <a href="/community-highlights/">Highlights</a>
       <a href="/#process">Process</a>
       <a href="/#contact">Contact</a>
     </nav>
@@ -327,6 +328,7 @@
       <h4>Organisation</h4>
       <a href="/#about">About Us</a>
       <a href="/safeguarding-compliance/">Safeguarding &amp; Compliance</a>
+      <a href="/community-highlights/">Community Highlights</a>
       <a href="/#process">Our Process</a>
       <a href="/#referral">Make a Referral</a>
       <a href="/#contact">Contact Us</a>
@@ -336,5 +338,15 @@
 </footer>
 
 <script src="/assets/nav.js" defer></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
 </body>
 </html>

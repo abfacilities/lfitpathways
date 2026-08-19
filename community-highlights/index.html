@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Highlights | L-Fit Pathways, Bootle & Sefton</title>
+<meta name="description" content="Photos and videos of what young people at L-Fit Pathways have been up to across Forest School, Animal Assisted Learning, Boxing Fitness and more.">
+<link rel="canonical" href="https://www.lfitpathways.com/community-highlights/">
+<link rel="icon" href="/assets/logo.png">
+<meta property="og:title" content="Community Highlights | L-Fit Pathways">
+<meta property="og:description" content="Photos and videos of what young people at L-Fit Pathways have been up to.">
+<meta property="og:image" content="https://www.lfitpathways.com/assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lfitpathways.com/community-highlights/">
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav-row">
+    <a href="/" class="logo"><img src="/assets/logo.png" alt="L-Fit Pathways"></a>
+    <nav class="main" id="site-nav">
+      <a href="/#about">About</a>
+      <a href="/#provisions">Provisions</a>
+      <a href="/#who">Who We Help</a>
+      <a href="/safeguarding-compliance/">Safeguarding</a>
+      <a href="/community-highlights/" class="active">Highlights</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+    <div class="nav-cta"><a class="btn" href="/#referral">Refer Now</a></div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> / Community Highlights</div>
+    <h1>Community Highlights</h1>
+    <p>A look at what young people have been up to across our provisions &mdash; shared only with signed consent, and always with their privacy front of mind.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container prose">
+    <div class="consent-note">
+      Every photo and video here is shared only with written photography/media consent from a parent or carer, in line with our <a href="/safeguarding-compliance/" style="color:var(--teal);font-weight:700">Safeguarding &amp; Compliance</a> policies. We avoid using full names and, where possible, choose images that don't focus on identifiable faces.
+    </div>
+
+    <div id="highlights-root" style="margin-top:8px"></div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="container" style="text-align:center">
+    <h2>Want to Know More About a Provision?</h2>
+    <p class="section-sub" style="margin:0 auto 24px">Explore what each of our provisions involves, or get in touch to talk through a referral.</p>
+    <a class="btn" href="/#provisions">See Our Provisions</a>
+    <a class="btn-outline" href="/#referral" style="border-color:#fff;color:#fff;margin-left:12px">Make a Referral</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container grid">
+    <div>
+      <h4>L-Fit Pathways</h4>
+      <p>Alternative provision for young people aged 5&ndash;25 across Bootle, Liverpool and Sefton. Safeguarding-led, KCSIE 2026 compliant.</p>
+    </div>
+    <div>
+      <h4>Provisions</h4>
+      <a href="/animal-assisted-learning/">Animal Assisted Learning</a>
+      <a href="/forest-school/">Forest School</a>
+      <a href="/educational-tuition/">Educational Tuition</a>
+      <a href="/boxing-fitness/">Boxing Fitness</a>
+      <a href="/life-skills/">Life Skills</a>
+    </div>
+    <div>
+      <h4>Organisation</h4>
+      <a href="/#about">About Us</a>
+      <a href="/safeguarding-compliance/">Safeguarding &amp; Compliance</a>
+      <a href="/community-highlights/">Community Highlights</a>
+      <a href="/#referral">Make a Referral</a>
+      <a href="/#contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="container bottom">&copy; 2026 L-Fit Pathways. All rights reserved. Co-Directors: Adam Byrne &amp; Craig Lloyd. Bootle, Liverpool.</div>
+</footer>
+
+<script src="/assets/nav.js" defer></script>
+<script>
+(function () {
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function videoEmbedUrl(url) {
+    if (!url) return null;
+    var yt = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{6,})/);
+    if (yt) return 'https://www.youtube-nocookie.com/embed/' + yt[1];
+    var vimeo = url.match(/vimeo\.com\/(\d+)/);
+    if (vimeo) return 'https://player.vimeo.com/video/' + vimeo[1];
+    return null;
+  }
+
+  function formatDate(d) {
+    try {
+      return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch (e) { return d || ''; }
+  }
+
+  function renderCard(entry) {
+    var media = '';
+    var embed = videoEmbedUrl(entry.video_url);
+    if (embed) {
+      media = '<div class="video-embed"><iframe src="' + embed + '" title="' + escapeHtml(entry.title) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
+    } else if (entry.images && entry.images.length === 1) {
+      media = '<div class="hc-media"><img src="' + escapeHtml(entry.images[0]) + '" alt="' + escapeHtml(entry.title) + '" loading="lazy"></div>';
+    } else if (entry.images && entry.images.length > 1) {
+      media = '<div class="hc-media-grid">' + entry.images.slice(0, 4).map(function (src) {
+        return '<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(entry.title) + '" loading="lazy">';
+      }).join('') + '</div>';
+    }
+    return '<div class="highlight-card">' + media +
+      '<div class="hc-body">' +
+      '<span class="hc-tag">' + escapeHtml(entry.provision) + '</span>' +
+      '<h3>' + escapeHtml(entry.title) + '</h3>' +
+      '<div class="hc-date">' + formatDate(entry.date) + '</div>' +
+      '<p>' + escapeHtml(entry.caption) + '</p>' +
+      '</div></div>';
+  }
+
+  fetch('/content/highlights.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : { entries: [] }; })
+    .then(function (data) {
+      var root = document.getElementById('highlights-root');
+      var entries = (data.entries || []).filter(function (e) { return e.consent_confirmed; });
+      if (!entries.length) {
+        root.innerHTML = '<div class="highlight-empty">We\'re just getting this page started &mdash; check back soon for photos and videos from our sessions.</div>';
+        return;
+      }
+      entries.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+      root.innerHTML = '<div class="highlight-grid">' + entries.map(renderCard).join('') + '</div>';
+    })
+    .catch(function () {
+      document.getElementById('highlights-root').innerHTML = '<div class="highlight-empty">We\'re just getting this page started &mdash; check back soon for photos and videos from our sessions.</div>';
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "highlights"
+    label: "Community Highlights"
+    description: "Photos and videos of what young people have been up to. IMPORTANT: only add a young person to a post if signed photography/media consent is already on file for them, avoid using full names, and prefer photos that don't clearly show faces where possible."
+    files:
+      - name: "highlights"
+        label: "Highlights Feed"
+        file: "content/highlights.json"
+        fields:
+          - label: "Entries"
+            name: "entries"
+            widget: "list"
+            label_singular: "Highlight"
+            summary: "{{title}} — {{date}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string", hint: "e.g. \"A morning at Forest School\" — keep it about the activity, not a specific child."}
+              - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+              - label: "Provision"
+                name: "provision"
+                widget: "select"
+                options:
+                  - "Forest School"
+                  - "Animal Assisted Learning"
+                  - "Educational Tuition"
+                  - "Boxing Fitness & Discipline"
+                  - "Life Skills"
+                  - "Reintegration & Transition"
+                  - "Community Wellbeing Hub"
+              - {label: "Caption", name: "caption", widget: "text", hint: "Describe the activity in general terms. Do not include full names of young people or identifying details."}
+              - label: "Photos"
+                name: "images"
+                widget: "list"
+                required: false
+                field: {label: "Image", name: "image", widget: "image"}
+              - {label: "Video URL", name: "video_url", widget: "string", required: false, hint: "Paste a YouTube or Vimeo link. On YouTube, set the video to \"Unlisted\" for extra privacy — it will still play here, just won't appear on your public channel/search."}
+              - label: "Consent confirmed"
+                name: "consent_confirmed"
+                widget: "boolean"
+                default: false
+                hint: "Required before publishing: confirm that signed photography/media consent is on file for every young person who appears in this post."
