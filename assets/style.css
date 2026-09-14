@@ -141,3 +141,26 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 @media (max-width:600px){
   .whatsapp-float{width:50px;height:50px;bottom:16px;right:16px}
 }
+
+.skip-link{
+  position:absolute;top:-60px;left:12px;z-index:1000;
+  background:var(--teal-darker);color:#fff;padding:12px 18px;border-radius:8px;
+  font-weight:700;font-size:.9rem;text-decoration:none;
+  transition:top .15s ease;
+}
+.skip-link:focus{top:12px}
+
+.back-to-top{
+  position:fixed;bottom:22px;right:90px;z-index:199;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--teal);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.back-to-top:hover{background:var(--teal-dark)}
+@media (max-width:600px){
+  .back-to-top{width:44px;height:44px;right:76px;bottom:16px}
+}
