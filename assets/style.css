@@ -88,6 +88,13 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 .side-card ul{list-style:none;padding:0;margin:16px 0}
 .side-card li{padding:8px 0;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--muted)}
 
+.form-row{margin-bottom:20px}
+.form-row label{display:block;font-weight:600;font-size:.92rem;color:var(--text);margin-bottom:7px}
+.form-row input,.form-row select,.form-row textarea{display:block;width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.95rem;color:var(--text);background:#fff;line-height:1.4}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,155,142,.15)}
+.form-row textarea{resize:vertical}
+.form-row select{appearance:auto}
+
 .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:0;cursor:pointer;padding:0;order:2}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--teal-darker);border-radius:2px;transition:transform .2s ease,opacity .2s ease}
 .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
