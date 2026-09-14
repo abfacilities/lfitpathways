@@ -260,8 +260,7 @@
     <h2>Refer a Young Person</h2>
     <p class="section-sub">Whether you are a parent, carer, school, college, local authority or other professional &mdash; our referral process is straightforward, safeguarding-led and fully confidential.</p>
     <div class="two-col">
-      <form name="referral" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="prose" style="margin-top:28px">
-        <input type="hidden" name="form-name" value="referral">
+      <form id="referral-form" class="prose" style="margin-top:28px">
         <p style="display:none"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
         <div class="form-row">
           <label>I am a *</label>
@@ -284,6 +283,7 @@
         <div class="form-row"><label>Tell us about the young person and what support is needed *</label><textarea name="details" rows="5" required></textarea></div>
         <div class="form-row"><label>Any current safeguarding concerns, medical needs or risk factors we should know? *</label><textarea name="safeguarding" rows="3" required></textarea></div>
         <button class="btn" type="submit" style="margin-top:8px;border:none">Submit Referral &rarr;</button>
+        <p id="referral-form-status" style="margin-top:12px;font-size:.9rem"></p>
         <p style="font-size:.82rem;color:var(--muted);margin-top:14px">All information is held in strict confidence and processed in accordance with GDPR and our Data Protection Policy. Submitting this form does not guarantee a placement.</p>
       </form>
       <div class="side-card">
@@ -337,6 +337,54 @@
   <div class="container bottom">&copy; 2026 L-Fit Pathways. All rights reserved. Co-Directors: Adam Byrne &amp; Craig Lloyd. Bootle, Liverpool.</div>
 </footer>
 
+<script>
+(function () {
+  var form = document.getElementById('referral-form');
+  var status = document.getElementById('referral-form-status');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.style.color = '';
+    status.textContent = 'Submitting...';
+    var data = {
+      referrer_type: form.referrer_type.value,
+      your_name: form.your_name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      child_name: form.child_name.value,
+      child_age: form.child_age.value,
+      provisions_interest: form.provisions_interest.value,
+      details: form.details.value,
+      safeguarding: form.safeguarding.value,
+      'bot-field': form['bot-field'].value
+    };
+    fetch('/api/referral', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+      .then(function (result) {
+        btn.disabled = false;
+        if (result.ok) {
+          status.style.color = 'green';
+          status.textContent = "Thank you \u2014 your referral has been received. We'll respond within 2 working days.";
+          form.reset();
+        } else {
+          status.style.color = '#c0392b';
+          status.textContent = (result.body && result.body.error) || 'Something went wrong. Please try again or call us directly.';
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        status.style.color = '#c0392b';
+        status.textContent = 'Something went wrong. Please try again or call us directly.';
+      });
+  });
+})();
+</script>
 <script src="/assets/nav.js" defer></script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
