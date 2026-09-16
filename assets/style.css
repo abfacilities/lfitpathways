@@ -94,6 +94,19 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,155,142,.15)}
 .form-row textarea{resize:vertical}
 .form-row select{appearance:auto}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:10px 18px}
+.checkbox-item{display:flex;align-items:center;gap:8px;font-weight:500;font-size:.92rem;color:var(--text);cursor:pointer}
+.checkbox-item input[type="checkbox"]{width:auto;flex-shrink:0}
+.form-row-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.school-details{border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin:24px 0;background:#fff}
+.school-details summary{cursor:pointer;font-weight:600;font-size:.92rem;color:var(--teal-dark);list-style:none}
+.school-details summary::-webkit-details-marker{display:none}
+.school-details summary::before{content:"+ ";color:var(--teal)}
+.school-details[open] summary::before{content:"\2212 "}
+.school-details summary span{font-weight:400;color:var(--muted);display:block;margin-top:2px;font-size:.85rem}
+.school-details-inner{margin-top:18px}
+.form-hint{font-size:.8rem;color:var(--muted);margin:6px 0 0}
+@media(max-width:640px){.form-row-grid{grid-template-columns:1fr}}
 
 .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:0;cursor:pointer;padding:0;order:2}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--teal-darker);border-radius:2px;transition:transform .2s ease,opacity .2s ease}

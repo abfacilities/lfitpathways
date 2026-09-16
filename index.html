@@ -264,7 +264,7 @@
         <p style="display:none"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
         <div class="form-row">
           <label>I am a *</label>
-          <select name="referrer_type" required>
+          <select name="referrer_type" id="referrer_type" required>
             <option value="">Select</option>
             <option>Parent / Carer</option>
             <option>School / SENCO</option>
@@ -274,14 +274,102 @@
             <option>Other</option>
           </select>
         </div>
+        <div class="form-row" id="referrer_org_row" style="display:none">
+          <label>Organisation / School Name</label>
+          <input type="text" name="referrer_org">
+        </div>
         <div class="form-row"><label>Your Name *</label><input type="text" name="your_name" required></div>
         <div class="form-row"><label>Email Address *</label><input type="email" name="email" required></div>
         <div class="form-row"><label>Phone Number *</label><input type="tel" name="phone" required></div>
         <div class="form-row"><label>Young Person&rsquo;s Name *</label><input type="text" name="child_name" required></div>
         <div class="form-row"><label>Young Person&rsquo;s Age *</label><input type="text" name="child_age" required></div>
-        <div class="form-row"><label>Provisions of Interest</label><input type="text" name="provisions_interest" placeholder="e.g. Forest School, Tuition"></div>
+        <div class="form-row">
+          <label>Provisions of Interest</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Forest School"> Forest School</label>
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Animal Assisted Learning"> Animal Assisted Learning</label>
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Educational Tuition"> Educational Tuition</label>
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Boxing Fitness"> Boxing Fitness</label>
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Life Skills"> Life Skills</label>
+            <label class="checkbox-item"><input type="checkbox" name="provisions_interest" value="Not sure yet"> Not sure yet</label>
+          </div>
+        </div>
         <div class="form-row"><label>Tell us about the young person and what support is needed *</label><textarea name="details" rows="5" required></textarea></div>
         <div class="form-row"><label>Any current safeguarding concerns, medical needs or risk factors we should know? *</label><textarea name="safeguarding" rows="3" required></textarea></div>
+
+        <details class="school-details" id="school-details-block">
+          <summary>School, college or local authority referral? Add commissioning details <span>(optional &mdash; helps us respond faster and cost the placement)</span></summary>
+          <div class="school-details-inner">
+            <div class="form-row-grid">
+              <div class="form-row"><label>Local Authority</label><input type="text" name="local_authority"></div>
+              <div class="form-row">
+                <label>Year Group / Key Stage</label>
+                <select name="year_group">
+                  <option value="">Select</option>
+                  <option>Reception</option>
+                  <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option>
+                  <option>Year 5</option><option>Year 6</option><option>Year 7</option><option>Year 8</option>
+                  <option>Year 9</option><option>Year 10</option><option>Year 11</option><option>Year 12</option>
+                  <option>Year 13</option><option>Post-16 / NEET</option>
+                </select>
+              </div>
+              <div class="form-row"><label>Date of Birth</label><input type="date" name="child_dob"></div>
+              <div class="form-row">
+                <label>Does the young person have an EHCP?</label>
+                <select name="ehcp"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row">
+                <label>Primary area of need</label>
+                <select name="primary_need">
+                  <option value="">Select</option>
+                  <option>ADHD</option><option>Autism</option><option>SEMH</option>
+                  <option>Behavioural difficulties</option><option>Learning difficulty / SEND</option>
+                  <option>Speech and language</option><option>Sensory impairment</option>
+                  <option>Anxiety / mental health</option><option>Other / not yet identified</option>
+                </select>
+              </div>
+              <div class="form-row"><label>Current attendance %</label><input type="text" name="attendance_pct" placeholder="e.g. 45%"></div>
+              <div class="form-row">
+                <label>Any current or recent exclusions?</label>
+                <select name="exclusions"><option value="">Select</option><option>Yes</option><option>No</option></select>
+              </div>
+              <div class="form-row">
+                <label>Social worker involved?</label>
+                <select name="social_worker"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row">
+                <label>CAMHS involved?</label>
+                <select name="camhs"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row">
+                <label>Child in need / child protection plan?</label>
+                <select name="child_in_need"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row">
+                <label>Looked after child (LAC)?</label>
+                <select name="looked_after"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row"><label>Preferred start date</label><input type="date" name="preferred_start"></div>
+              <div class="form-row">
+                <label>Days per week needed</label>
+                <select name="days_per_week"><option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Supporting documents <span style="font-weight:400;color:var(--muted)">(EHCP, recent school report, risk assessment &mdash; optional)</span></label>
+              <input type="file" name="documents" multiple accept=".pdf,.doc,.docx,image/*">
+              <p class="form-hint">PDF, Word or image files, up to 7MB each.</p>
+            </div>
+          </div>
+        </details>
+
+        <div class="form-row" style="margin-top:20px">
+          <label class="checkbox-item" style="font-weight:600;align-items:flex-start">
+            <input type="checkbox" name="consent" required style="margin-top:3px">
+            <span>I confirm this information is accurate to the best of my knowledge and I agree to L-Fit Pathways processing it in line with our Data Protection Policy. *</span>
+          </label>
+        </div>
+
         <button class="btn" type="submit" style="margin-top:8px;border:none">Submit Referral &rarr;</button>
         <p id="referral-form-status" style="margin-top:12px;font-size:.9rem"></p>
         <p style="font-size:.82rem;color:var(--muted);margin-top:14px">All information is held in strict confidence and processed in accordance with GDPR and our Data Protection Policy. Submitting this form does not guarantee a placement.</p>
@@ -341,29 +429,30 @@
 (function () {
   var form = document.getElementById('referral-form');
   var status = document.getElementById('referral-form-status');
+  var referrerType = document.getElementById('referrer_type');
+  var orgRow = document.getElementById('referrer_org_row');
+  var detailsBlock = document.getElementById('school-details-block');
   if (!form) return;
+
+  var PROFESSIONAL_TYPES = ['School / SENCO', 'Local Authority', 'College', 'Social Worker or Professional'];
+  if (referrerType) {
+    referrerType.addEventListener('change', function () {
+      var isPro = PROFESSIONAL_TYPES.indexOf(referrerType.value) !== -1;
+      if (orgRow) orgRow.style.display = isPro ? '' : 'none';
+      if (isPro && detailsBlock) detailsBlock.open = true;
+    });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     status.style.color = '';
     status.textContent = 'Submitting...';
-    var data = {
-      referrer_type: form.referrer_type.value,
-      your_name: form.your_name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      child_name: form.child_name.value,
-      child_age: form.child_age.value,
-      provisions_interest: form.provisions_interest.value,
-      details: form.details.value,
-      safeguarding: form.safeguarding.value,
-      'bot-field': form['bot-field'].value
-    };
+    var data = new FormData(form);
     fetch('/api/referral', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: data
     })
       .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
       .then(function (result) {
@@ -372,6 +461,8 @@
           status.style.color = 'green';
           status.textContent = "Thank you \u2014 your referral has been received. We'll respond within 2 working days.";
           form.reset();
+          if (orgRow) orgRow.style.display = 'none';
+          if (detailsBlock) detailsBlock.open = false;
         } else {
           status.style.color = '#c0392b';
           status.textContent = (result.body && result.body.error) || 'Something went wrong. Please try again or call us directly.';
