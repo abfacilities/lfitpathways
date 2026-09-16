@@ -98,7 +98,7 @@
     <div class="section-eyebrow">About L-Fit Pathways</div>
     <h2>A Different Kind of <em style="color:var(--teal);font-style:normal">Learning</em></h2>
     <p class="section-sub">&ldquo;We believe every young person deserves a pathway &mdash; no matter where they are starting from.&rdquo;</p>
-    <p style="max-width:720px;color:var(--text)">Founded by co-directors Adam Byrne and Craig Lloyd, L-Fit Pathways is an alternative provision based in Bootle, Liverpool. We support young people aged 5 to 25 who have not yet found the right environment to thrive &mdash; offering structured, compassionate, experience-based learning with safeguarding at the centre of everything we do.</p>
+    <p style="max-width:720px;color:var(--text)">Founded by co-directors Adam Byrne and Craig Lloyd, L-Fit Pathways is an alternative provision based in Bootle, Liverpool. We support young people aged 5 to 25 who have not yet found the right environment to thrive &mdash; offering structured, compassionate, experience-based learning with safeguarding at the centre of everything we do. <a href="/meet-the-team/" style="color:var(--teal);font-weight:700">Meet the team &rarr;</a></p>
     <ul class="check-list" style="max-width:720px;margin:20px 0 8px;padding:0;list-style:none">
       <li style="padding-left:28px;position:relative;margin-bottom:10px;color:var(--text)"><span style="position:absolute;left:0;color:var(--teal)">&#10003;</span> Trauma-informed, relationship-based practice at our core</li>
       <li style="padding-left:28px;position:relative;margin-bottom:10px;color:var(--text)"><span style="position:absolute;left:0;color:var(--teal)">&#10003;</span> KCSIE 2026 compliant &mdash; full safeguarding and SEND policies in place</li>
@@ -378,13 +378,66 @@
         <h3>Prefer to talk first?</h3>
         <p style="color:var(--muted);font-size:.92rem">We respond to every enquiry within 2 working days &mdash; parents, schools, colleges and local authorities are all welcome to get in touch directly.</p>
         <ul>
-          <li>&#128205; Irlam Road, Bootle, Liverpool L20</li>
+          <li>&#128205; <a href="/locations/">Irlam Road, Bootle, Liverpool L20</a></li>
           <li>&#128231; <a href="mailto:adam.byrne@lfitpathways.com">adam.byrne@lfitpathways.com</a></li>
           <li>&#128222; <a href="tel:+447944308462">07944 308462</a></li>
           <li>&#128337; Mon&ndash;Fri: 8:30am&ndash;5:00pm</li>
+          <li>&#128197; <a href="/term-dates/">Term Dates</a></li>
           <li>&#128247; <a href="https://instagram.com/lfit_pathways" target="_blank" rel="noopener">@lfit_pathways</a></li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="section-eyebrow">What Families Say</div>
+    <h2>Feedback From Those We <em style="color:var(--teal);font-style:normal">Work With</em></h2>
+    <p class="section-sub">We're just getting started collecting feedback from the families, schools and professionals we work with &mdash; check back soon, or be the first to leave a review below.</p>
+
+    <div class="testimonial-empty">
+      <p>No reviews published yet &mdash; when families and professionals share feedback, genuine reviews will appear here.</p>
+    </div>
+
+    <div class="two-col" style="margin-top:32px;grid-template-columns:1fr">
+      <form id="review-form" class="prose" style="max-width:560px">
+        <h3 style="margin-top:0">Leave a Review</h3>
+        <div class="form-row"><label>Your Name *</label><input type="text" name="reviewer_name" required></div>
+        <div class="form-row">
+          <label>Relationship *</label>
+          <select name="relationship" required>
+            <option value="">Select</option>
+            <option>Parent / Carer</option>
+            <option>School / SENCO</option>
+            <option>Local Authority</option>
+            <option>College</option>
+            <option>Social Worker or Professional</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Rating *</label>
+          <select name="rating" required>
+            <option value="">Select</option>
+            <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5)</option>
+            <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4)</option>
+            <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3)</option>
+            <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2)</option>
+            <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1)</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Your Review *</label><textarea name="review_text" rows="4" required></textarea></div>
+        <div class="form-row">
+          <label class="checkbox-item" style="font-weight:600;align-items:flex-start">
+            <input type="checkbox" name="confirm_truthful" required style="margin-top:3px">
+            <span>I confirm this feedback is truthful and may be published on the website after moderation. *</span>
+          </label>
+        </div>
+        <button class="btn" type="submit" style="margin-top:8px;border:none">Submit Review &rarr;</button>
+        <p id="review-form-status" style="margin-top:12px;font-size:.9rem"></p>
+        <p style="font-size:.82rem;color:var(--muted);margin-top:14px">Reviews are sent to us for moderation before publishing &mdash; they are not published automatically.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -415,8 +468,12 @@
     <div>
       <h4>Organisation</h4>
       <a href="/#about">About Us</a>
+      <a href="/meet-the-team/">Meet the Team</a>
       <a href="/safeguarding-compliance/">Safeguarding &amp; Compliance</a>
+      <a href="/locations/">Our Location</a>
+      <a href="/term-dates/">Term Dates</a>
       <a href="/community-highlights/">Community Highlights</a>
+      <a href="/gallery/">Gallery</a>
       <a href="/#process">Our Process</a>
       <a href="/#referral">Make a Referral</a>
       <a href="/#contact">Contact Us</a>
@@ -472,6 +529,42 @@
         btn.disabled = false;
         status.style.color = '#c0392b';
         status.textContent = 'Something went wrong. Please try again or call us directly.';
+      });
+  });
+})();
+</script>
+<script>
+(function () {
+  var form = document.getElementById('review-form');
+  var status = document.getElementById('review-form-status');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.style.color = '';
+    status.textContent = 'Submitting...';
+    var data = new FormData(form);
+    fetch('/api/review', {
+      method: 'POST',
+      body: data
+    })
+      .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+      .then(function (result) {
+        btn.disabled = false;
+        if (result.ok) {
+          status.style.color = 'green';
+          status.textContent = "Thank you \u2014 your review has been sent for moderation.";
+          form.reset();
+        } else {
+          status.style.color = '#c0392b';
+          status.textContent = (result.body && result.body.error) || 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        status.style.color = '#c0392b';
+        status.textContent = 'Something went wrong. Please try again.';
       });
   });
 })();
