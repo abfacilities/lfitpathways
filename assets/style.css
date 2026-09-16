@@ -209,3 +209,11 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 .testimonial-empty{border:1px solid var(--border);border-radius:14px;padding:32px;text-align:center;background:var(--cream);margin-top:8px}
 .testimonial-empty p{color:var(--muted);margin:0}
 .star-select{display:flex;gap:6px;font-size:1.4rem}
+
+
+/* Policies & Documents */
+.policy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
+.policy-card{border:1px solid var(--border);border-radius:14px;padding:24px;background:#fff}
+.policy-card h3{margin:0 0 8px;font-size:1.02rem}
+.policy-card p{color:var(--muted);font-size:.9rem;margin:0 0 12px}
+.policy-meta{font-size:.78rem;color:var(--muted);margin-bottom:14px}
