@@ -203,6 +203,12 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 .term-table th,.term-table td{border:1px solid var(--border);padding:12px 16px;text-align:left}
 .term-table th{background:var(--cream);color:var(--teal-darker);font-family:'Poppins',sans-serif}
 .term-table td.term-name{font-weight:700;color:var(--teal-darker)}
+.term-detail{margin-top:44px}
+.term-detail h3{margin:36px 0 4px;color:var(--teal-darker)}
+.term-detail h3:first-child{margin-top:0}
+.term-detail .term-table{margin-top:10px;max-width:520px}
+.term-detail .term-table td.term-name{width:60%}
+
 
 /* Locations */
 .map-embed{border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-top:24px}
