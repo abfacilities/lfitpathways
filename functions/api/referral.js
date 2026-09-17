@@ -23,12 +23,17 @@ const MAX_TOTAL_ATTACHMENT_BYTES = 15 * 1024 * 1024; // 15MB combined
 const TEXT_FIELDS = [
   'referrer_type', 'referrer_org', 'local_authority',
   'your_name', 'email', 'phone',
-  'child_name', 'child_age', 'child_dob', 'year_group',
-  'ehcp', 'primary_need', 'attendance_pct', 'exclusions',
-  'social_worker', 'camhs', 'child_in_need', 'looked_after',
-  'preferred_start', 'days_per_week',
+  'child_name', 'child_age', 'child_dob', 'year_group', 'upn', 'ethnicity',
+  'ehcp', 'primary_need', 'level_of_need', 'main_barrier', 'attendance_pct', 'exclusions',
+  'social_worker', 'camhs', 'child_in_need', 'looked_after', 'exploitation_risk', 'dietary',
+  'safeguarding_contact_name', 'safeguarding_contact_email', 'safeguarding_contact_phone',
+  'finance_contact_email', 'po_number',
+  'preferred_start',
   'details', 'safeguarding'
 ];
+
+// Multi-value checkbox fields (submitted as repeated form-data entries).
+const CHECKBOX_ARRAY_FIELDS = ['medical_needs', 'wellbeing_needs', 'schedule_slots'];
 
 async function fileToBase64(file) {
   const buf = await file.arrayBuffer();
@@ -53,6 +58,7 @@ export async function onRequestPost(context) {
 
   const fields = {};
   let provisionsInterest = [];
+  const checkboxArrays = {};
   let botField;
   let attachments = [];
   let attachmentNote = '';
@@ -66,12 +72,19 @@ export async function onRequestPost(context) {
       provisionsInterest = body.provisions_interest
         ? (Array.isArray(body.provisions_interest) ? body.provisions_interest : [body.provisions_interest])
         : [];
+      for (const key of CHECKBOX_ARRAY_FIELDS) {
+        const val = body[key];
+        checkboxArrays[key] = val ? (Array.isArray(val) ? val : [val]) : [];
+      }
       fields.consent = body.consent;
     } else {
       const form = await request.formData();
       botField = form.get('bot-field');
       for (const key of TEXT_FIELDS) fields[key] = form.get(key);
       provisionsInterest = form.getAll('provisions_interest').filter(Boolean);
+      for (const key of CHECKBOX_ARRAY_FIELDS) {
+        checkboxArrays[key] = form.getAll(key).filter(Boolean);
+      }
       fields.consent = form.get('consent');
 
       // Optional supporting-document uploads.
@@ -117,12 +130,17 @@ export async function onRequestPost(context) {
   const {
     referrer_type, referrer_org, local_authority,
     your_name, email, phone,
-    child_name, child_age, child_dob, year_group,
-    ehcp, primary_need, attendance_pct, exclusions,
-    social_worker, camhs, child_in_need, looked_after,
-    preferred_start, days_per_week,
+    child_name, child_age, child_dob, year_group, upn, ethnicity,
+    ehcp, primary_need, level_of_need, main_barrier, attendance_pct, exclusions,
+    social_worker, camhs, child_in_need, looked_after, exploitation_risk, dietary,
+    safeguarding_contact_name, safeguarding_contact_email, safeguarding_contact_phone,
+    finance_contact_email, po_number,
+    preferred_start,
     details, safeguarding, consent
   } = fields;
+  const medicalNeeds = checkboxArrays.medical_needs || [];
+  const wellbeingNeeds = checkboxArrays.wellbeing_needs || [];
+  const scheduleSlots = checkboxArrays.schedule_slots || [];
 
   if (!your_name || !email || !phone || !child_name || !child_age || !details || !safeguarding) {
     return new Response(JSON.stringify({ error: 'Please fill in all required fields.' }), {
@@ -151,10 +169,12 @@ export async function onRequestPost(context) {
   // Only show the school/LA commissioning block in the email if at least one
   // of those fields was actually filled in, so parent self-referrals stay short.
   const hasCommissioningDetail = [
-    referrer_org, local_authority, child_dob, year_group, ehcp, primary_need,
-    attendance_pct, exclusions, social_worker, camhs, child_in_need,
-    looked_after, preferred_start, days_per_week
-  ].some(Boolean);
+    referrer_org, local_authority, child_dob, year_group, upn, ethnicity,
+    ehcp, primary_need, level_of_need, main_barrier, attendance_pct, exclusions,
+    social_worker, camhs, child_in_need, looked_after, exploitation_risk, dietary,
+    safeguarding_contact_name, safeguarding_contact_email, safeguarding_contact_phone,
+    finance_contact_email, po_number, preferred_start
+  ].some(Boolean) || medicalNeeds.length || wellbeingNeeds.length || scheduleSlots.length;
 
   const lines = [
     `Referrer type: ${referrer_type || '(not given)'}`,
@@ -178,19 +198,44 @@ export async function onRequestPost(context) {
     lines.push(
       '',
       '--- School / Local Authority commissioning details ---',
-      local_authority ? `Local Authority: ${local_authority}` : null,
-      year_group ? `Year group / key stage: ${year_group}` : null,
-      child_dob ? `Date of birth: ${child_dob}` : null,
-      ehcp ? `EHCP: ${ehcp}` : null,
-      primary_need ? `Primary area of need: ${primary_need}` : null,
-      attendance_pct ? `Current attendance: ${attendance_pct}` : null,
-      exclusions ? `Current/recent exclusions: ${exclusions}` : null,
-      social_worker ? `Social worker involved: ${social_worker}` : null,
-      camhs ? `CAMHS involved: ${camhs}` : null,
-      child_in_need ? `Child in need / protection plan: ${child_in_need}` : null,
-      looked_after ? `Looked after child: ${looked_after}` : null,
-      preferred_start ? `Preferred start date: ${preferred_start}` : null,
-      days_per_week ? `Days per week needed: ${days_per_week}` : null
+      '',
+      'Pupil details:',
+      local_authority ? `  Local Authority: ${local_authority}` : null,
+      year_group ? `  Year group / key stage: ${year_group}` : null,
+      child_dob ? `  Date of birth: ${child_dob}` : null,
+      upn ? `  UPN: ${upn}` : null,
+      ethnicity ? `  Ethnicity: ${ethnicity}` : null,
+      '',
+      'Need & SEND:',
+      ehcp ? `  EHCP: ${ehcp}` : null,
+      primary_need ? `  Primary area of need: ${primary_need}` : null,
+      level_of_need ? `  Level of need: ${level_of_need}` : null,
+      main_barrier ? `  Main barrier to engagement: ${main_barrier}` : null,
+      attendance_pct ? `  Current attendance: ${attendance_pct}` : null,
+      exclusions ? `  Current/recent exclusions: ${exclusions}` : null,
+      '',
+      'Multi-agency involvement:',
+      social_worker ? `  Social worker involved: ${social_worker}` : null,
+      camhs ? `  CAMHS involved: ${camhs}` : null,
+      child_in_need ? `  Child in need / protection plan: ${child_in_need}` : null,
+      looked_after ? `  Looked after child: ${looked_after}` : null,
+      exploitation_risk ? `  Exploitation / missing episodes risk: ${exploitation_risk}` : null,
+      dietary ? `  Dietary requirements / allergies: ${dietary}` : null,
+      '',
+      (medicalNeeds.length || wellbeingNeeds.length) ? 'Health & wellbeing:' : null,
+      medicalNeeds.length ? `  Known medical needs: ${medicalNeeds.join(', ')}` : null,
+      wellbeingNeeds.length ? `  Known emotional/wellbeing needs: ${wellbeingNeeds.join(', ')}` : null,
+      '',
+      (safeguarding_contact_name || safeguarding_contact_email || safeguarding_contact_phone || finance_contact_email || po_number) ? 'Safeguarding & commissioning contacts:' : null,
+      safeguarding_contact_name ? `  Social worker / safeguarding lead: ${safeguarding_contact_name}` : null,
+      safeguarding_contact_email ? `  Safeguarding lead email: ${safeguarding_contact_email}` : null,
+      safeguarding_contact_phone ? `  Safeguarding lead phone: ${safeguarding_contact_phone}` : null,
+      finance_contact_email ? `  Finance/commissioning contact: ${finance_contact_email}` : null,
+      po_number ? `  PO number / cost centre: ${po_number}` : null,
+      '',
+      (preferred_start || scheduleSlots.length) ? 'Placement & schedule:' : null,
+      preferred_start ? `  Preferred start date: ${preferred_start}` : null,
+      scheduleSlots.length ? `  Preferred days/times: ${scheduleSlots.join(', ')}` : null
     );
   }
 

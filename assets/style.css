@@ -107,6 +107,16 @@ footer.site .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;p
 .school-details-inner{margin-top:18px}
 .form-hint{font-size:.8rem;color:var(--muted);margin:6px 0 0}
 @media(max-width:640px){.form-row-grid{grid-template-columns:1fr}}
+.form-subhead{font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);margin:26px 0 12px;padding-top:18px;border-top:1px solid var(--border)}
+.form-subhead:first-child{margin-top:0;padding-top:0;border-top:none}
+.daygrid{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.daygrid-row{display:grid;grid-template-columns:1fr 56px 56px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--border);font-size:.92rem}
+.daygrid-row:last-child{border-bottom:none}
+.daygrid-head{font-weight:600;font-size:.78rem;color:var(--muted);background:#f7f7f7;text-transform:uppercase;letter-spacing:.03em}
+.daygrid-row .checkbox-item{justify-content:center}
+.daygrid-row .checkbox-item input{margin:0}
+@media(max-width:640px){.daygrid-row{grid-template-columns:1fr 48px 48px;padding:8px 10px}}
+
 
 .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:0;cursor:pointer;padding:0;order:2}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--teal-darker);border-radius:2px;transition:transform .2s ease,opacity .2s ease}

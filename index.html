@@ -300,6 +300,8 @@
         <details class="school-details" id="school-details-block">
           <summary>School, college or local authority referral? Add commissioning details <span>(optional &mdash; helps us respond faster and cost the placement)</span></summary>
           <div class="school-details-inner">
+
+            <p class="form-subhead">Pupil details</p>
             <div class="form-row-grid">
               <div class="form-row"><label>Local Authority</label><input type="text" name="local_authority"></div>
               <div class="form-row">
@@ -314,6 +316,25 @@
                 </select>
               </div>
               <div class="form-row"><label>Date of Birth</label><input type="date" name="child_dob"></div>
+              <div class="form-row"><label>Unique Pupil Number (UPN)</label><input type="text" name="upn" placeholder="e.g. A123456789012"></div>
+              <div class="form-row">
+                <label>Ethnicity <span style="font-weight:400;color:var(--muted)">(optional, LA monitoring)</span></label>
+                <select name="ethnicity">
+                  <option value="">Prefer not to say</option>
+                  <option>White - British</option><option>White - Irish</option><option>White - Any other White background</option>
+                  <option>Mixed - White and Black Caribbean</option><option>Mixed - White and Black African</option>
+                  <option>Mixed - White and Asian</option><option>Mixed - Any other mixed background</option>
+                  <option>Asian or Asian British - Indian</option><option>Asian or Asian British - Pakistani</option>
+                  <option>Asian or Asian British - Bangladeshi</option><option>Asian or Asian British - Any other Asian background</option>
+                  <option>Black or Black British - Caribbean</option><option>Black or Black British - African</option>
+                  <option>Black or Black British - Any other Black background</option>
+                  <option>Chinese</option><option>Any other ethnic group</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="form-subhead">Need &amp; SEND</p>
+            <div class="form-row-grid">
               <div class="form-row">
                 <label>Does the young person have an EHCP?</label>
                 <select name="ehcp"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
@@ -325,7 +346,25 @@
                   <option>ADHD</option><option>Autism</option><option>SEMH</option>
                   <option>Behavioural difficulties</option><option>Learning difficulty / SEND</option>
                   <option>Speech and language</option><option>Sensory impairment</option>
+                  <option>Dyslexia</option><option>Dyspraxia</option><option>Developmental delay</option>
                   <option>Anxiety / mental health</option><option>Other / not yet identified</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Level of need</label>
+                <select name="level_of_need">
+                  <option value="">Select</option>
+                  <option>Universal</option><option>Early help</option><option>Child in need</option>
+                  <option>Child protection</option><option>Cared for child</option><option>Post looked after child</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Main barrier to engagement</label>
+                <select name="main_barrier">
+                  <option value="">Select</option>
+                  <option>Behavioural</option><option>Emotional (including mental health)</option>
+                  <option>Social (including environmental)</option><option>Academic (including cognition and learning)</option>
+                  <option>Physical (including sensory needs)</option>
                 </select>
               </div>
               <div class="form-row"><label>Current attendance %</label><input type="text" name="attendance_pct" placeholder="e.g. 45%"></div>
@@ -333,6 +372,10 @@
                 <label>Any current or recent exclusions?</label>
                 <select name="exclusions"><option value="">Select</option><option>Yes</option><option>No</option></select>
               </div>
+            </div>
+
+            <p class="form-subhead">Multi-agency involvement</p>
+            <div class="form-row-grid">
               <div class="form-row">
                 <label>Social worker involved?</label>
                 <select name="social_worker"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
@@ -349,12 +392,63 @@
                 <label>Looked after child (LAC)?</label>
                 <select name="looked_after"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
               </div>
-              <div class="form-row"><label>Preferred start date</label><input type="date" name="preferred_start"></div>
               <div class="form-row">
-                <label>Days per week needed</label>
-                <select name="days_per_week"><option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                <label>Known risk of exploitation or missing episodes?</label>
+                <select name="exploitation_risk"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+              </div>
+              <div class="form-row"><label>Dietary requirements or allergies</label><input type="text" name="dietary" placeholder="e.g. none, or details"></div>
+            </div>
+
+            <p class="form-subhead">Health &amp; wellbeing <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">(tick any that apply)</span></p>
+            <div class="form-row">
+              <label>Known medical needs</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Asthma"> Asthma</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Epilepsy / seizures"> Epilepsy / seizures</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Diabetes"> Diabetes</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Severe allergy / anaphylaxis"> Severe allergy / anaphylaxis</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Physical disability affecting mobility"> Physical disability affecting mobility</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Requires medication during sessions"> Requires medication during sessions</label>
+                <label class="checkbox-item"><input type="checkbox" name="medical_needs" value="Other (see notes above)"> Other (see notes above)</label>
               </div>
             </div>
+            <div class="form-row">
+              <label>Known emotional / wellbeing needs</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Anxiety"> Anxiety</label>
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Low mood / depression"> Low mood / depression</label>
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Trauma history / ACEs"> Trauma history / ACEs</label>
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Emotional dysregulation"> Emotional dysregulation</label>
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Self-harm history"> Self-harm history</label>
+                <label class="checkbox-item"><input type="checkbox" name="wellbeing_needs" value="Other (see notes above)"> Other (see notes above)</label>
+              </div>
+              <p class="form-hint">For any current or urgent safety concern, please call us directly as well as noting it above &mdash; do not rely on this form alone.</p>
+            </div>
+
+            <p class="form-subhead">Safeguarding &amp; commissioning contacts</p>
+            <div class="form-row-grid">
+              <div class="form-row"><label>Social worker / safeguarding lead name</label><input type="text" name="safeguarding_contact_name"></div>
+              <div class="form-row"><label>Social worker / safeguarding lead email</label><input type="email" name="safeguarding_contact_email"></div>
+              <div class="form-row"><label>Social worker / safeguarding lead phone</label><input type="tel" name="safeguarding_contact_phone"></div>
+              <div class="form-row"><label>Finance / commissioning contact email</label><input type="email" name="finance_contact_email"></div>
+              <div class="form-row"><label>PO number / cost centre</label><input type="text" name="po_number"></div>
+              <div class="form-row"><label>Preferred start date</label><input type="date" name="preferred_start"></div>
+            </div>
+
+            <p class="form-subhead">Preferred schedule</p>
+            <div class="form-row">
+              <label>Days &amp; times needed</label>
+              <div class="daygrid">
+                <div class="daygrid-row daygrid-head"><span></span><span>AM</span><span>PM</span></div>
+                <div class="daygrid-row"><span>Monday</span><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Monday AM"></label><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Monday PM"></label></div>
+                <div class="daygrid-row"><span>Tuesday</span><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Tuesday AM"></label><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Tuesday PM"></label></div>
+                <div class="daygrid-row"><span>Wednesday</span><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Wednesday AM"></label><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Wednesday PM"></label></div>
+                <div class="daygrid-row"><span>Thursday</span><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Thursday AM"></label><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Thursday PM"></label></div>
+                <div class="daygrid-row"><span>Friday</span><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Friday AM"></label><label class="checkbox-item"><input type="checkbox" name="schedule_slots" value="Friday PM"></label></div>
+              </div>
+              <p class="form-hint">Tick all sessions that would suit &mdash; we&rsquo;ll confirm exact timings at the initial meeting.</p>
+            </div>
+
             <div class="form-row">
               <label>Supporting documents <span style="font-weight:400;color:var(--muted)">(EHCP, recent school report, risk assessment &mdash; optional)</span></label>
               <input type="file" name="documents" multiple accept=".pdf,.doc,.docx,image/*">
