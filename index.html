@@ -536,6 +536,52 @@
   </div>
 </section>
 
+<section style="background:var(--bg)">
+  <div class="container" style="max-width:680px;text-align:center">
+    <div class="section-eyebrow">Stay Connected</div>
+    <h2>Get Updates From <em style="color:var(--teal);font-style:normal">L-Fit Pathways</em></h2>
+    <p class="section-sub">Occasional news on new provisions, policy updates and places we support &mdash; straight to your inbox, no spam.</p>
+    <form id="newsletter-form" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:420px;margin:20px auto 0">
+      <input type="text" name="bot-field" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+      <input type="email" name="email" required placeholder="you@example.com" style="flex:1;min-width:220px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;font-size:1rem">
+      <button class="btn" type="submit" style="border:none">Subscribe</button>
+    </form>
+    <p id="newsletter-form-status" style="margin-top:12px;font-size:.9rem"></p>
+  </div>
+</section>
+
+<script>
+(function () {
+  const form = document.getElementById('newsletter-form');
+  const status = document.getElementById('newsletter-form-status');
+  if (!form) return;
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.textContent = 'Submitting...';
+    const formData = new FormData(form);
+    try {
+      const res = await fetch('/api/newsletter-subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.get('email'), 'bot-field': formData.get('bot-field') })
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        status.style.color = 'var(--teal)';
+        status.textContent = "Thanks for subscribing! You're on the list.";
+        form.reset();
+      } else {
+        status.style.color = '#c0392b';
+        status.textContent = data.error || 'Something went wrong. Please try again.';
+      }
+    } catch (err) {
+      status.style.color = '#c0392b';
+      status.textContent = 'Something went wrong. Please try again.';
+    }
+  });
+})();
+</script>
+
 <section class="cta-band" id="contact">
   <div class="container">
     <h2>We Would Love to <em style="color:var(--teal);font-style:normal">Hear From You</em></h2>
